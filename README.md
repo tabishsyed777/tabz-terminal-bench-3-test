@@ -1,10 +1,24 @@
-# Tabz Terminal-Bench 3 Task Prototypes
+# Tabz Terminal-Bench 3 Tasks
 
-This repository contains two Harbor-style Terminal-Bench task projects:
+This repository organizes each Harbor task under `tasks/<task-name>/`.
 
-| Task | Challenge | Local validation |
+| Task | Summary | Current checks |
 | --- | --- | --- |
-| [`jpeg-carve-thumbs/`](jpeg-carve-thumbs/README.md) | Recover intact JPEGs from raw disk bytes while rejecting decoys and embedded previews. | Oracle recovered all 8 exact originals; hash verifier passed. |
-| [`sdcard-photo-recovery/`](sdcard-photo-recovery/README.md) | Recover complete photos from a damaged SD card with one- or two-piece fragmentation. | Revised Oracle recovered all 8 exact originals; hash verifier passed. |
+| [`jpeg-carve-thumbs`](tasks/jpeg-carve-thumbs/README.md) | Recover intact JPEGs from disk bytes while rejecting decoys and embedded previews. | Local oracle and hash verifier passed. |
+| [`sdcard-photo-recovery`](tasks/sdcard-photo-recovery/README.md) | Recover complete photos from a damaged card with one- or two-piece fragmentation. | Revised local oracle and hash verifier passed. |
 
-Both are prototypes, not yet officially validated Terminal-Bench submissions. Harbor/Docker runs, no-op tests, current agent calibration, and contributor review remain to be completed. Each task README documents its status and next steps.
+## Run task checks
+
+Install Harbor and Docker, then run from the repository root:
+
+```bash
+harbor check tasks/jpeg-carve-thumbs
+harbor run -p tasks/jpeg-carve-thumbs --agent oracle
+harbor run -p tasks/jpeg-carve-thumbs --agent nop
+
+harbor check tasks/sdcard-photo-recovery
+harbor run -p tasks/sdcard-photo-recovery --agent oracle
+harbor run -p tasks/sdcard-photo-recovery --agent nop
+```
+
+These tasks have not had Harbor runs or frontier-agent difficulty calibration yet, so they are prototypes rather than benchmark-validated submissions. Their task READMEs include details and remaining checks.
